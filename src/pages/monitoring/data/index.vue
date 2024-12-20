@@ -1,35 +1,30 @@
 <template>
-  <div class="relative bg-[#FCFAEE] flex min-h-screen flex-col">
-    <!-- Navbar -->
-    <div class="bg-[#FCFAEE] backdrop-filter backdrop-blur-lg bg-opacity-30 shadow-sm w-full h-12 sm:h-12 md:h-12 lg:h-12 fixed top-0 z-50 flex items-center gap-4 px-4 sm:px-6 md:px-8 lg:px-10 shadow-lg">
-      <div class="bg-red-500 sm:ml-4 md:ml-6 lg:ml-6 rounded-full w-10 h-10 sm:w-12 sm:h-10 md:w-10 md:h-10 lg:w-10 lg:h-10"></div>
-      <div class="bg-yellow-500 rounded-full w-10 h-10 sm:w-12 sm:h-10 md:w-10 md:h-10 lg:w-10 lg:h-10"></div>
-      <div class="bg-green-500 rounded-full w-10 h-10 sm:w-12 sm:h-10 md:w-10 md:h-10 lg:w-10 lg:h-10"></div>
-    </div>
-
-    <div class="flex flex-grow flex-col md:flex-row mt-20">
+  <div class="relative bg-[#001F3F] flex min-h-screen overflow-hidden">
+    <div class="flex flex-grow flex-col md:flex-row">
       <!-- Sidebar -->
-      <aside class="w-14 sm:w-14 md:w-14 lg:w-14 h-screen fixed top-11 left-0 px-4 bg-[#91091E] flex flex-col items-center py-2 space-y-6 shadow-lg flex-shrink-0">
+      <aside class="w-14 sm:w-14 md:w-14 lg:w-14 h-screen fixed left-6 px-4 bg-[#001F3F] flex flex-col items-center py-2 space-y-4 shadow-lg flex-shrink-0">
         <!-- Logo -->
-        <div class="mb-2 mt-4 transition-transform hover:scale-110 duration-300">
-          <div class="w-12 bg-[#FFF0D1] rounded-xl flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform duration-300">
-            <a href="/">
-              <img class="w-fit h-fit p-2" src="@/assets/tank.png" alt="Logo" />
+        <div class="mt-72 mb-2 mt-4 transition-transform hover:scale-110 duration-300">
+          <div class="w-16 sm:w-16 md:w-16 lg:w-16 sm:h-14 md:h-14 lg:h-14 bg-[#E5E1DA] rounded-3xl flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform duration-300">
+            <a href="/" title="Home">
+              <img class="w-fit h-fit p-2 group-hover:scale-110 transition-transform duration-300"
+              src="@/assets/tank.png" alt="Logo" />
             </a>
           </div>
         </div>
         <!-- Navigation -->
         <nav class="flex flex-col gap-6">
-          <div class="w-12">
-            <a href="/data" class="flex items-center justify-center rounded-xl bg-[#FFF0D1] shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400">
-              <img class="w-12 h-12 p-2" src="@/assets/angkadata.png" alt="Data" />
-            </a>
-          </div>
-          <a href="/charts" class="flex items-center justify-center rounded-xl bg-[#FFF0D1] shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400">
-            <img class="w-12 h-12 p-2" src="@/assets/charts.png" alt="Charts" />
+          <div class="w-16 sm:w-16 md:w-16 lg:w-16 sm:h-14 md:h-14 lg:h-14">
+            <a href="/data" title="Data" class="flex items-center justify-center rounded-3xl bg-[#47B5FF] shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400">
+            <img class="w-16 sm:w-16 md:w-16 lg:w-16 sm:h-14 md:h-14 lg:h-14 p-2 group-hover:scale-110 transition-transform duration-300" src="@/assets/angkadata.png" alt="Data" />
           </a>
-          <a href="/history" class="flex items-center justify-center rounded-xl bg-[#FFF0D1] shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400">
-            <img class="w-12 h-12 p-2" src="@/assets/history.png" alt="History" />
+          </div>
+
+          <a href="/charts" title="Charts" class="flex items-center justify-center rounded-3xl bg-[#E5E1DA] shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400">
+            <img class="w-16 sm:w-16 md:w-16 lg:w-16 sm:h-14 md:h-14 lg:h-14 p-2 group-hover:scale-110 transition-transform duration-300" src="@/assets/charts.png" alt="Charts" />
+          </a>
+          <a href="/history" title="History" class="flex items-center justify-center rounded-3xl bg-[#E5E1DA] shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400">
+            <img class="w-16 sm:w-16 md:w-16 lg:w-16 sm:h-14 md:h-14 lg:h-14 p-2 group-hover:scale-110 transition-transform duration-300" src="@/assets/history.png" alt="History" />
           </a>
         </nav>
       </aside>
@@ -37,13 +32,13 @@
       <!-- Main Content -->
       <div class="flex-grow flex flex-col gap-4 p-4 ml-14">
         <div class="text-center mt-8">
-          <h1 class="text-[#91091E] font-bold text-4xl">Sensor Data</h1>
+          <h1 class="text-[#47B5FF] font-bold text-4xl">Sensor Data</h1>
         </div>
 
         <div data-aos="fade-up" data-aos-duration="2000" class="flex flex-col gap-4 items-center flex-grow mt-4">
           <!-- Loading State -->
           <div v-if="isLoading" class="text-center">
-            <p class="text-[#91091E] font-bold">Loading sensor data...</p>
+            <p class="text-[#47B5FF] font-bold">Loading sensor data...</p>
           </div>
 
           <div v-else class="flex flex-col gap-4 items-center flex-grow mt-4 w-full">
@@ -126,7 +121,7 @@ onUnmounted(() => {
 
 <style scoped>
 .sensor-card {
-  background-color: #C39E5C;
+  background-color: #E5E1DA;
   border-radius: 1.5rem;
   padding: 1.5rem;
   width: 90%;
@@ -136,14 +131,14 @@ onUnmounted(() => {
 }
 
 .sensor-title {
-  color: #91091E;
+  color: #001F3F;
   font-weight: bold;
   font-size: 1.5rem;
   margin-bottom: 0.25rem;
 }
 
 .sensor-value {
-  color: #91091E;
+  color: #001F3F;
   font-weight: bold;
   font-size: 1rem;
   margin: 0.1rem 0;
