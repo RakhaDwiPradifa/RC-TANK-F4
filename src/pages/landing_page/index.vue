@@ -77,7 +77,7 @@
 
       <!-- Card 2 -->
       <div class="relative group duration-500 cursor-pointer mb-6 overflow-hidden text-gray-50 max-w-full rounded-2xl hover:duration-700">
-        <div class="w-full h-96 bg-[#A52422] text-gray-800">
+        <div class="w-full h-96 bg-[#91091E] text-gray-800">
           <img class="w-full h-full object-cover" src="@/assets/agung.png" alt="Anggota 2" />
         </div>
         <div class="absolute bg-[#A4BAB7] -bottom-20 w-full p-3 flex flex-col gap-1 group-hover:-bottom-0 group-hover:duration-600 duration-500">
