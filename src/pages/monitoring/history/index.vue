@@ -43,29 +43,58 @@
         </div>
 
         <div data-aos="fade-up" data-aos-duration="2000" class="flex flex-col items-center flex-grow mt-4">
-          <!-- History Data Table -->
+          <!-- Piezo Data Table -->
           <div class="history-container mt-4 w-full max-w-7xl overflow-y-auto overflow-x-auto">
+            <h2 class="text-2xl font-semibold text-[#91091E] mb-4">Piezo Data</h2>
             <table class="history-table w-full text-center border-collapse">
               <thead>
                 <tr class="bg-[#C39E5C] text-[#91091E]">
-                  <th class="p-2">Timestamp</th>
-                  <th class="p-2">Piezo Value</th>
-                  <th class="p-2">Temperature (°C)</th>
-                  <th class="p-2">Humidity (%)</th>
+                  <th class="p-2 border border-[#91091E]">Timestamp</th>
+                  <th class="p-2 border border-[#91091E]">Piezo Value</th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-if="sensorHistory.length === 0">
-                  <td colspan="4">No data available</td>
+                <tr v-if="paginatedPiezoData.length === 0">
+                  <td colspan="2">No data available</td>
                 </tr>
-                <tr v-for="(entry, index) in sensorHistory" :key="index" class="bg-[#F3E4C9] text-[#91091E]">
-                  <td class="p-2">{{ entry.timestamp }}</td>
-                  <td class="p-2">{{ entry.piezo }}</td>
-                  <td class="p-2">{{ entry.temperature }}</td>
-                  <td class="p-2">{{ entry.humidity }}</td>
+                <tr v-for="(entry, index) in paginatedPiezoData" :key="index" class="bg-[#F3E4C9] text-[#91091E]">
+                  <td class="p-2 border border-[#91091E]">{{ entry.timestamp }}</td>
+                  <td class="p-2 border border-[#91091E]">{{ entry.vibrationLevel }}</td>
                 </tr>
               </tbody>
             </table>
+            <div class="flex justify-center mt-4">
+              <button @click="prevPage('piezo')" :disabled="piezoPage === 1" class="bg-[#C39E5C] text-[#91091E] px-4 py-2 rounded disabled:opacity-50">Previous</button>
+              <button @click="nextPage('piezo')" :disabled="piezoPage === piezoTotalPages" class="bg-[#C39E5C] text-[#91091E] px-4 py-2 ml-2 rounded disabled:opacity-50">Next</button>
+            </div>
+          </div>
+
+          <!-- DHT22 Data Table -->
+          <div class="history-container mt-8 w-full max-w-7xl overflow-y-auto overflow-x-auto">
+            <h2 class="text-2xl font-semibold text-[#91091E] mb-4">DHT22 Data</h2>
+            <table class="history-table w-full text-center border-collapse">
+              <thead>
+                <tr class="bg-[#C39E5C] text-[#91091E]">
+                  <th class="p-2 border border-[#91091E]">Timestamp</th>
+                  <th class="p-2 border border-[#91091E]">Temperature (°C)</th>
+                  <th class="p-2 border border-[#91091E]">Humidity (%)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-if="paginatedDhtData.length === 0">
+                  <td colspan="3">No data available</td>
+                </tr>
+                <tr v-for="(entry, index) in paginatedDhtData" :key="index" class="bg-[#F3E4C9] text-[#91091E]">
+                  <td class="p-2 border border-[#91091E]">{{ entry.timestamp }}</td>
+                  <td class="p-2 border border-[#91091E]">{{ entry.temperature }}</td>
+                  <td class="p-2 border border-[#91091E]">{{ entry.humidity }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="flex justify-center mt-4">
+              <button @click="prevPage('dht')" :disabled="dhtPage === 1" class="bg-[#C39E5C] text-[#91091E] px-4 py-2 rounded disabled:opacity-50">Previous</button>
+              <button @click="nextPage('dht')" :disabled="dhtPage === dhtTotalPages" class="bg-[#C39E5C] text-[#91091E] px-4 py-2 ml-2 rounded disabled:opacity-50">Next</button>
+            </div>
           </div>
         </div>
       </div>
@@ -74,62 +103,21 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-
-const sensorHistory = ref([]);
-
-// Helper function to normalize timestamp (removing milliseconds)
-const normalizeTimestamp = (timestamp) => {
-  return new Date(timestamp).toISOString().split('.')[0]; // Trim milliseconds
-};
-
-const fetchSensorHistory = async () => {
-  try {
-    console.log('Fetching data...');
-
-    // Fetch Piezo data
-    const piezoResponse = await fetch('https://backend-tank.vercel.app/api/piezzo');
-    const piezoData = await piezoResponse.json();
-
-    // Fetch DHT22 data
-    const dhtResponse = await fetch('https://backend-tank.vercel.app/api/dht22');
-    const dhtData = await dhtResponse.json();
-
-    console.log('Piezo Data:', piezoData);
-    console.log('DHT22 Data:', dhtData);
-
-    // Combine data based on normalized timestamp
-    sensorHistory.value = piezoData.data.map(piezoEntry => {
-      // Normalize the timestamp for comparison
-      const normalizedPiezoTimestamp = normalizeTimestamp(piezoEntry.timestamp);
-
-      // Find the corresponding DHT22 entry by normalized timestamp
-      const dhtEntry = dhtData.data.find(dht => normalizeTimestamp(dht.timestamp) === normalizedPiezoTimestamp);
-
-      // Log to debug the matching process
-      console.log(`Matching Piezo Timestamp: ${normalizedPiezoTimestamp}`);
-      if (dhtEntry) {
-        console.log(`Found matching DHT entry:`, dhtEntry);
-      } else {
-        console.log(`No matching DHT entry for timestamp: ${normalizedPiezoTimestamp}`);
-      }
-
-      return {
-        timestamp: piezoEntry.timestamp,
-        piezo: piezoEntry.vibrationLevel,
-        temperature: dhtEntry ? dhtEntry.temperature : null,
-        humidity: dhtEntry ? dhtEntry.humidity : null,
-      };
-    });
-
-    console.log('Combined Sensor History:', sensorHistory.value);
-  } catch (error) {
-    console.error('Error fetching sensor history:', error);
-  }
-};
+import { ref, computed, onMounted } from 'vue';
+import {
+  piezoData,
+  dhtData,
+  piezoPage,
+  dhtPage,
+  paginatedPiezoData,
+  paginatedDhtData,
+  piezoTotalPages,
+  dhtTotalPages,
+  fetchSensorData,
+} from '@/utils/sensorData.js';
 
 onMounted(() => {
-  fetchSensorHistory();
+  fetchSensorData();
 });
 </script>
 
