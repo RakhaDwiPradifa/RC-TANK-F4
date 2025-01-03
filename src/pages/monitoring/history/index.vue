@@ -60,7 +60,7 @@
 
           <div data-aos="fade-up" data-aos-duration="2000" class="flex flex-col items-start flex-grow mt-4">
             <!-- Piezo Data Table -->
-            <div class="history-container mt-4 w-full px-0"> <!-- Removed padding to remove margin -->
+            <div class="history-container mt-4 w-full px-0">
               <h2 class="text-2xl font-semibold text-[#47B5FF] mb-4">Piezo Data</h2>
               <div class="table-responsive">
                 <table class="history-table w-full text-center border-collapse">
@@ -88,9 +88,9 @@
             </div>
 
             <!-- DHT22 Data Table -->
-            <div class="history-container mt-8 w-full px-0"> <!-- Removed padding to remove margin -->
+            <div class="history-container mt-8 w-full px-0">
               <h2 class="text-2xl font-semibold text-[#47B5FF] mb-4">DHT22 Data</h2>
-              <div class="table-responsive overflow-x-auto"> <!-- Added overflow-x-auto -->
+              <div class="table-responsive overflow-x-auto">
                 <table class="history-table w-full text-center border-collapse">
                   <thead>
                     <tr class="bg-[#47B5FF] text-[#001F3F]">
@@ -180,24 +180,24 @@ onMounted(() => {
 
 .table-responsive {
   width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow-x: auto; /* Ensure horizontal scrolling is enabled */
 }
 
 @media (max-width: 767px) {
   .history-table {
     display: block;
-    white-space: nowrap;
-  }
-  .text-left {
-    text-align: left !important;
+    width: 100%;
+    overflow-x: auto; /* Allow horizontal scrolling */
   }
   .history-container {
     padding-left: 0;
     padding-right: 0;
   }
+  .history-table th, .history-table td {
+    min-width: 120px; /* Set minimum width for columns */
+  }
   .flex.items-center.justify-center > img {
-    filter: brightness(0) invert(1);
+    filter: brightness(0) invert(1); /* Membuat ikon menjadi putih */
   }
 }
 </style>
