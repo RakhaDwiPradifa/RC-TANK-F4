@@ -85,6 +85,9 @@
                 <button @click="prevPage('piezo')" :disabled="piezoPage === 1" class="bg-white text-[#001F3F] px-4 py-2 rounded disabled:opacity-50">Previous</button>
                 <button @click="nextPage('piezo')" :disabled="piezoPage === piezoTotalPages" class="bg-[#47B5FF] text-[#001F3F] px-4 py-2 ml-2 rounded disabled:opacity-50">Next</button>
               </div>
+              <div class="text-center mt-2 text-[#47B5FF]">
+                Page {{ piezoPage }} of {{ piezoTotalPages }}
+              </div>
             </div>
 
             <!-- DHT22 Data Table -->
@@ -114,6 +117,9 @@
               <div class="flex justify-center mt-4">
                 <button @click="prevPage('dht')" :disabled="dhtPage === 1" class="bg-white text-[#001F3F] px-4 py-2 rounded disabled:opacity-50">Previous</button>
                 <button @click="nextPage('dht')" :disabled="dhtPage === dhtTotalPages" class="bg-[#47B5FF] text-[#001F3F] px-4 py-2 ml-2 rounded disabled:opacity-50">Next</button>
+              </div>
+              <div class="text-center mt-2 text-[#47B5FF]">
+                Page {{ dhtPage }} of {{ dhtTotalPages }}
               </div>
             </div>
           </div>
