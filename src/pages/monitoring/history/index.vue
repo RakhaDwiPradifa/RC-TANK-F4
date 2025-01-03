@@ -55,7 +55,7 @@
         <!-- Main Content -->
         <div class="flex-grow flex flex-col p-4 md:ml-[100px] md:mr-[65px] mt-[56px]"> <!-- Added mt-[56px] for mobile navbar spacing -->
           <div class="text-left mt-8">
-            <h1 class="text-[#E5E1DA] font-bold text-3xl md:text-7xl">History</h1>
+            <h1 class="text-[#E5E1DA] font-bold text-3xl md:text-7xl underline">History</h1>
           </div>
 
           <div data-aos="fade-up" data-aos-duration="2000" class="flex flex-col items-start flex-grow mt-4">
