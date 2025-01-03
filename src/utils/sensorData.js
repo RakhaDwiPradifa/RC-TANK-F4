@@ -29,46 +29,22 @@ const paginatedDhtData = computed(() => {
 const piezoTotalPages = computed(() => Math.ceil(piezoData.value.length / pageSize));
 const dhtTotalPages = computed(() => Math.ceil(dhtData.value.length / pageSize));
 
-// Chart data preparation for Piezo sensor
-const piezoChartData = computed(() => ({
-  labels: piezoData.value.map((item) => item.timestamp || 'N/A'), // Use 'N/A' if timestamp is missing
-  datasets: [
-    {
-      label: 'Piezo Sensor Data',
-      data: piezoData.value.map((item) => item.value || 0), // Use 0 if value is missing
-      fill: false,
-      borderColor: 'rgba(75, 192, 192, 1)',
-      tension: 0.1,
-    },
-  ],
-}));
+// Handlers for pagination
+const prevPage = (type) => {
+  if (type === 'piezo' && piezoPage.value > 1) {
+    piezoPage.value--;
+  } else if (type === 'dht' && dhtPage.value > 1) {
+    dhtPage.value--;
+  }
+};
 
-// Chart data preparation for DHT22 Temperature and Humidity
-const dhtTempChartData = computed(() => ({
-  labels: dhtData.value.map((item) => item.timestamp || 'N/A'),
-  datasets: [
-    {
-      label: 'Temperature (°C)',
-      data: dhtData.value.map((item) => item.temperature || 0),
-      fill: false,
-      borderColor: 'rgba(255, 99, 132, 1)',
-      tension: 0.1,
-    },
-  ],
-}));
-
-const dhtHumChartData = computed(() => ({
-  labels: dhtData.value.map((item) => item.timestamp || 'N/A'),
-  datasets: [
-    {
-      label: 'Humidity (%)',
-      data: dhtData.value.map((item) => item.humidity || 0),
-      fill: false,
-      borderColor: 'rgba(54, 162, 235, 1)',
-      tension: 0.1,
-    },
-  ],
-}));
+const nextPage = (type) => {
+  if (type === 'piezo' && piezoPage.value < piezoTotalPages.value) {
+    piezoPage.value++;
+  } else if (type === 'dht' && dhtPage.value < dhtTotalPages.value) {
+    dhtPage.value++;
+  }
+};
 
 // Fetch sensor data from the backend
 const fetchSensorData = async () => {
@@ -165,4 +141,6 @@ export {
   paginatedDhtData,
   fetchSensorData,
   renderCharts,
+  prevPage,
+  nextPage,
 };
