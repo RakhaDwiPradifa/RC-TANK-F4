@@ -161,7 +161,7 @@ onMounted(() => {
 .history-container {
   width: 100%;
   max-width: 100%;
-  padding: 0; /* Removed padding to prevent space */
+  padding: 0;
   margin: 0 auto;
 }
 
@@ -186,24 +186,24 @@ onMounted(() => {
 
 .table-responsive {
   width: 100%;
-  overflow-x: auto; /* Ensure horizontal scrolling is enabled */
+  overflow-x: auto;
 }
 
 @media (max-width: 767px) {
   .history-table {
     display: block;
     width: 100%;
-    overflow-x: auto; /* Allow horizontal scrolling */
+    overflow-x: auto;
   }
   .history-container {
     padding-left: 0;
     padding-right: 0;
   }
   .history-table th, .history-table td {
-    min-width: 120px; /* Set minimum width for columns */
+    min-width: 100px;
   }
   .flex.items-center.justify-center > img {
-    filter: brightness(0) invert(1); /* Membuat ikon menjadi putih */
+    filter: brightness(0) invert(1);
   }
 }
 </style>
