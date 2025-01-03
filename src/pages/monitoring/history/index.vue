@@ -53,32 +53,34 @@
         </nav>
 
         <!-- Main Content -->
-        <div class="flex-grow flex flex-col p-4 md:ml-[100px] md:mr-[65px]">
-          <div class="text-center mt-8">
-            <h1 class="text-[#E5E1DA] font-bold text-7xl">History</h1>
+        <div class="flex-grow flex flex-col p-4 md:ml-[100px] md:mr-[65px] mt-[56px]"> <!-- Added mt-[56px] for mobile navbar spacing -->
+          <div class="text-left mt-8">
+            <h1 class="text-[#E5E1DA] font-bold text-3xl md:text-7xl">History</h1>
           </div>
 
-          <div data-aos="fade-up" data-aos-duration="2000" class="flex flex-col items-center flex-grow mt-4">
+          <div data-aos="fade-up" data-aos-duration="2000" class="flex flex-col items-start flex-grow mt-4">
             <!-- Piezo Data Table -->
-            <div class="history-container mt-4 w-full max-w-7xl overflow-x-auto">
+            <div class="history-container mt-4 w-full px-0"> <!-- Removed padding to remove margin -->
               <h2 class="text-2xl font-semibold text-[#47B5FF] mb-4">Piezo Data</h2>
-              <table class="history-table w-full text-center border-collapse">
-                <thead>
-                  <tr class="bg-[#47B5FF] text-[#001F3F]">
-                    <th class="p-2 border border-black">Piezo Value</th>
-                    <th class="p-2 border border-black">Timestamp</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-if="paginatedPiezoData.length === 0">
-                    <td colspan="2">No data available</td>
-                  </tr>
-                  <tr v-for="(entry, index) in paginatedPiezoData" :key="index" class="bg-white text-[#001F3F]">
-                    <td class="p-2 border border-black">{{ entry.vibrationLevel }}</td>
-                    <td class="p-2 border border-black">{{ entry.timestamp }}</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="table-responsive">
+                <table class="history-table w-full text-center border-collapse">
+                  <thead>
+                    <tr class="bg-[#47B5FF] text-[#001F3F]">
+                      <th class="p-2 border border-black">Piezo Value</th>
+                      <th class="p-2 border border-black">Timestamp</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-if="paginatedPiezoData.length === 0">
+                      <td colspan="2">No data available</td>
+                    </tr>
+                    <tr v-for="(entry, index) in paginatedPiezoData" :key="index" class="bg-white text-[#001F3F]">
+                      <td class="p-2 border border-black">{{ entry.vibrationLevel }}</td>
+                      <td class="p-2 border border-black">{{ entry.timestamp }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
               <div class="flex justify-center mt-4">
                 <button @click="prevPage('piezo')" :disabled="piezoPage === 1" class="bg-white text-[#001F3F] px-4 py-2 rounded disabled:opacity-50">Previous</button>
                 <button @click="nextPage('piezo')" :disabled="piezoPage === piezoTotalPages" class="bg-[#47B5FF] text-[#001F3F] px-4 py-2 ml-2 rounded disabled:opacity-50">Next</button>
@@ -86,27 +88,29 @@
             </div>
 
             <!-- DHT22 Data Table -->
-            <div class="history-container mt-8 w-full max-w-7xl overflow-x-auto">
+            <div class="history-container mt-8 w-full px-0"> <!-- Removed padding to remove margin -->
               <h2 class="text-2xl font-semibold text-[#47B5FF] mb-4">DHT22 Data</h2>
-              <table class="history-table w-full text-center border-collapse">
-                <thead>
-                  <tr class="bg-[#47B5FF] text-[#001F3F]">
-                    <th class="p-2 border border-black">Temperature (°C)</th>
-                    <th class="p-2 border border-black">Humidity (%)</th>
-                    <th class="p-2 border border-black">Timestamp</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-if="paginatedDhtData.length === 0">
-                    <td colspan="3">No data available</td>
-                  </tr>
-                  <tr v-for="(entry, index) in paginatedDhtData" :key="index" class="bg-white text-[#001F3F]">
-                    <td class="p-2 border border-black">{{ entry.temperature }}</td>
-                    <td class="p-2 border border-black">{{ entry.humidity }}</td>
-                    <td class="p-2 border border-black">{{ entry.timestamp }}</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="table-responsive overflow-x-auto"> <!-- Added overflow-x-auto -->
+                <table class="history-table w-full text-center border-collapse">
+                  <thead>
+                    <tr class="bg-[#47B5FF] text-[#001F3F]">
+                      <th class="p-2 border border-black">Temperature (°C)</th>
+                      <th class="p-2 border border-black">Humidity (%)</th>
+                      <th class="p-2 border border-black">Timestamp</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-if="paginatedDhtData.length === 0">
+                      <td colspan="3">No data available</td>
+                    </tr>
+                    <tr v-for="(entry, index) in paginatedDhtData" :key="index" class="bg-white text-[#001F3F]">
+                      <td class="p-2 border border-black">{{ entry.temperature }}</td>
+                      <td class="p-2 border border-black">{{ entry.humidity }}</td>
+                      <td class="p-2 border border-black">{{ entry.timestamp }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
               <div class="flex justify-center mt-4">
                 <button @click="prevPage('dht')" :disabled="dhtPage === 1" class="bg-white text-[#001F3F] px-4 py-2 rounded disabled:opacity-50">Previous</button>
                 <button @click="nextPage('dht')" :disabled="dhtPage === dhtTotalPages" class="bg-[#47B5FF] text-[#001F3F] px-4 py-2 ml-2 rounded disabled:opacity-50">Next</button>
@@ -151,7 +155,7 @@ onMounted(() => {
 .history-container {
   width: 100%;
   max-width: 100%;
-  overflow-x: auto;
+  padding: 0; /* Removed padding to prevent space */
   margin: 0 auto;
 }
 
@@ -174,17 +178,23 @@ onMounted(() => {
   text-align: left;
 }
 
-/* Styling untuk ikon dan sidebar ketika di mobile */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 @media (max-width: 767px) {
   .history-table {
     display: block;
-    overflow-x: auto;
     white-space: nowrap;
-    width: 90%;
-    margin: 0 auto;
+  }
+  .text-left {
+    text-align: left !important;
   }
   .history-container {
-    margin: 0 10px; /* Add some margin to prevent content from touching the edges */
+    padding-left: 0;
+    padding-right: 0;
   }
   .flex.items-center.justify-center > img {
     filter: brightness(0) invert(1);
