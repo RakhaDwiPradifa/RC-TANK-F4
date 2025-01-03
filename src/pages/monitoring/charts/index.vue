@@ -123,12 +123,12 @@ const fetchSensorData = async () => {
     // Fetch Piezo data
     const piezoResponse = await fetch('https://backend-tank.vercel.app/api/piezzo');
     const piezoResponseData = await piezoResponse.json();
-    piezoData.value = piezoResponseData.data.slice(-5).reverse(); // Reverse order of data
+    piezoData.value = piezoResponseData.data.reverse();
 
     // Fetch DHT22 data
     const dhtResponse = await fetch('https://backend-tank.vercel.app/api/dht22');
     const dhtResponseData = await dhtResponse.json();
-    dhtData.value = dhtResponseData.data.slice(-5).reverse(); // Reverse order of data
+    dhtData.value = dhtResponseData.data.reverse(); // No slicing, raw data
 
     isLoading.value = false;
     console.log('Piezo Data:', piezoData.value);
@@ -139,14 +139,16 @@ const fetchSensorData = async () => {
   }
 };
 
-// Function to prepare Piezo data for chart
 const piezoChartData = computed(() => {
+  // Membatasi hanya 5 data terakhir
+  const limitedPiezoData = piezoData.value.slice(-5); // Mengambil 5 data terakhir
+
   return {
-    labels: piezoData.value.map(item => item.timestamp), // Do not reverse labels
+    labels: limitedPiezoData.map(item => new Date(item.timestamp).toLocaleString()), // Convert timestamp to readable format
     datasets: [
       {
         label: 'Vibration Level',
-        data: piezoData.value.map(item => item.vibrationLevel), // Do not reverse data
+        data: limitedPiezoData.map(item => item.vibrationLevel), // Use vibrationLevel data
         fill: false,
         borderColor: 'rgba(75, 192, 192, 1)',
         tension: 0.1
@@ -155,14 +157,16 @@ const piezoChartData = computed(() => {
   };
 });
 
-// Function to prepare DHT22 Temperature chart data
 const dhtTempChartData = computed(() => {
+  // Membatasi hanya 5 data terakhir
+  const limitedDhtData = dhtData.value.slice(-5); // Mengambil 5 data terakhir
+
   return {
-    labels: dhtData.value.map(item => item.timestamp), // Do not reverse labels
+    labels: limitedDhtData.map(item => new Date(item.timestamp).toLocaleString()), // Convert timestamp to readable format
     datasets: [
       {
         label: 'Temperature (°C)',
-        data: dhtData.value.map(item => item.temperature), // Do not reverse data
+        data: limitedDhtData.map(item => item.temperature), // Use temperature data
         fill: false,
         borderColor: 'rgba(255, 99, 132, 1)',
         tension: 0.1
@@ -171,14 +175,16 @@ const dhtTempChartData = computed(() => {
   };
 });
 
-// Function to prepare DHT22 Humidity chart data
 const dhtHumChartData = computed(() => {
+  // Membatasi hanya 5 data terakhir
+  const limitedDhtData = dhtData.value.slice(-5); // Mengambil 5 data terakhir
+
   return {
-    labels: dhtData.value.map(item => item.timestamp), // Do not reverse labels
+    labels: limitedDhtData.map(item => new Date(item.timestamp).toLocaleString()), // Convert timestamp to readable format
     datasets: [
       {
         label: 'Humidity (%)',
-        data: dhtData.value.map(item => item.humidity), // Do not reverse data
+        data: limitedDhtData.map(item => item.humidity), // Use humidity data
         fill: false,
         borderColor: 'rgba(54, 162, 235, 1)',
         tension: 0.1
@@ -225,6 +231,8 @@ const renderCharts = () => {
             display: true,
             text: 'Vibration Level',
           },
+          min: Math.min(...piezoData.value.map(item => item.vibrationLevel)) - 100, // Margin 100 di bawah min
+          max: Math.max(...piezoData.value.map(item => item.vibrationLevel)) + 100, // Margin 100 di atas max
         },
       },
     },
@@ -259,6 +267,8 @@ const renderCharts = () => {
             display: true,
             text: 'Temperature (°C)',
           },
+          min: Math.min(...dhtData.value.map(item => item.temperature)) - 2, // Margin di bawah min temperature
+          max: Math.max(...dhtData.value.map(item => item.temperature)) + 2, // Margin di atas max temperature
         },
       },
     },
@@ -293,6 +303,8 @@ const renderCharts = () => {
             display: true,
             text: 'Humidity (%)',
           },
+          min: Math.min(...dhtData.value.map(item => item.humidity)) - 5, // Margin di bawah min humidity
+          max: Math.max(...dhtData.value.map(item => item.humidity)) + 5, // Margin di atas max humidity
         },
       },
     },
