@@ -109,7 +109,7 @@
 </template>
 
 <script>
-import davinImage from "@/assets/davin2.png";
+import davinImage from "@/assets/davin.png";
 import agungImage from "@/assets/agung.png";
 import rakhaImage from "@/assets/rakha.png";
 import zulfanImage from "@/assets/zulfan.png";
@@ -146,13 +146,13 @@ export default {
         },
         {
           name: "Mega Tri Nurdiani",
-          skills: "Mechatronic, laporan, testing",
+          skills: "laporan, testing",
           description: "Saya Mahasiswa Institut Teknologi Nasional Bandung.",
           image: megaImage,
         },
         {
           name: "Rizal Pratama",
-          skills: "laporan, mechatronic, testing",
+          skills: "laporan, testing",
           description: "Saya Mahasiswa Institut Teknologi Nasional Bandung.",
           image: rizalImage,
         },

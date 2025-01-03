@@ -8,7 +8,7 @@
         >
           <!-- Logo -->
           <div class="mt-8 transition-transform hover:scale-110 duration-300">
-            <div class="w-16 h-16 bg-[#47B5FF] rounded-3xl flex items-center justify-center shadow-lg">
+            <div class="w-16 h-16 bg-[#E5E1DA] rounded-3xl flex items-center justify-center shadow-lg">
               <a href="/" title="Home">
                 <img class="w-12 h-12 p-2" src="@/assets/tank.png" alt="Logo" />
               </a>
@@ -18,7 +18,7 @@
           <nav class="flex flex-col gap-6">
             <a
               href="/data"
-              class="w-16 h-16 bg-[#E5E1DA] rounded-3x flex items-center justify-center hover:shadow-lg rounded-3xl"
+              class="w-16 h-16 bg-[#47B5FF] rounded-3x flex items-center justify-center hover:shadow-lg rounded-3xl"
             >
               <img class="w-12 h-12" src="@/assets/angkadata.png" alt="Data" />
             </a>
