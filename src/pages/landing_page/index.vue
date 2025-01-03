@@ -113,6 +113,8 @@ import davinImage from "@/assets/davin2.png";
 import agungImage from "@/assets/agung.png";
 import rakhaImage from "@/assets/rakha.png";
 import zulfanImage from "@/assets/zulfan.png";
+import rizalImage from "@/assets/rizal.png";
+import megaImage from "@/assets/mega.png";
 
 export default {
   data() {
@@ -138,9 +140,21 @@ export default {
         },
         {
           name: "M Zulfan Anggadhiputra",
-          skills: "Mechatronic, Wiring",
+          skills: "Mechatronic, Wiring, testing",
           description: "Saya Mahasiswa Institut Teknologi Nasional Bandung.",
           image: zulfanImage,
+        },
+        {
+          name: "Mega Tri Nurdiani",
+          skills: "Mechatronic, laporan, testing",
+          description: "Saya Mahasiswa Institut Teknologi Nasional Bandung.",
+          image: megaImage,
+        },
+        {
+          name: "Rizal Pratama",
+          skills: "laporan, mechatronic, testing",
+          description: "Saya Mahasiswa Institut Teknologi Nasional Bandung.",
+          image: rizalImage,
         },
       ],
     };
