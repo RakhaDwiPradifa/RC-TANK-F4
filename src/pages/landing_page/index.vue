@@ -18,19 +18,19 @@
           <nav class="flex flex-col gap-6">
             <a
               href="/data"
-              class="w-16 h-16 bg-[#E5E1DA] rounded-3x flex items-center justify-center hover:shadow-lg rounded-3xl"
+              class="w-16 h-16 bg-[#E5E1DA] rounded-3x flex items-center justify-center hover:shadow-lg rounded-3xl hover:bg-[#47B5FF] duration-500"
             >
               <img class="w-12 h-12" src="@/assets/angkadata.png" alt="Data" />
             </a>
             <a
               href="/charts"
-              class="w-16 h-16 bg-[#E5E1DA] rounded-3x flex items-center justify-center hover:shadow-lg rounded-3xl"
+              class="w-16 h-16 bg-[#E5E1DA] rounded-3x flex items-center justify-center hover:shadow-lg rounded-3xl hover:bg-[#47B5FF] duration-500"
             >
               <img class="w-12 h-12" src="@/assets/charts.png" alt="Charts" />
             </a>
             <a
               href="/history"
-              class="w-16 h-16 bg-[#E5E1DA] rounded-3x flex items-center justify-center hover:shadow-lg rounded-3xl"
+              class="w-16 h-16 bg-[#E5E1DA] rounded-3x flex items-center justify-center hover:shadow-lg rounded-3xl hover:bg-[#47B5FF] duration-500"
             >
               <img class="w-12 h-12" src="@/assets/history.png" alt="History" />
             </a>
@@ -56,7 +56,7 @@
         <div class="flex-grow flex flex-col overflow-y-auto md:ml-[100px]">
           <!-- Background with Text -->
           <div class="relative flex flex-col justify-center items-center min-h-screen text-center px-6 md:px-4">
-            <div class="relative z-10 bg-black/50 p-8 md:p-6 rounded-xl">
+            <div data-aos="zoom-in" data-aos-duration="2000" class="relative z-10 bg-black/50 p-8 md:p-6 rounded-xl">
               <h1 class="text-[#47B5FF] text-4xl md:text-6xl font-bold">
                 With Great Intelligence
               </h1>
