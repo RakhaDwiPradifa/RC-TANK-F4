@@ -140,7 +140,7 @@ export default {
         },
         {
           name: "M Zulfan Anggadhiputra",
-          skills: "Mechatronic, Wiring, testing",
+          skills: "Mechatronic, Wiring, arena",
           description: "Saya Mahasiswa Institut Teknologi Nasional Bandung.",
           image: zulfanImage,
         },
